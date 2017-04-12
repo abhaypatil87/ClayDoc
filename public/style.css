@@ -1,0 +1,6 @@
+.ClayItemPreview {
+  margin: 1em; }
+  .ClayItemPreview .item-name {
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+    padding: 0.25em; }

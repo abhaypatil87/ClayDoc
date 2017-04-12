@@ -1,0 +1,40 @@
+{
+	"content": [
+		{
+			"id": 1,
+			"name": "Blue Bottle",
+			"clay": "Black Mountain",
+			"date": {
+				"thrown": "2017-04-06",
+				"bisqued": "2017-04-06",
+				"glazed": ""
+			},
+			"cone": 10,
+			"weight": {
+				"onTheWheel": "300",
+				"beforeBisque": "200",
+				"afterBisque": "150",
+				"afterGlazed": ""
+			},
+			"glazes": "description of the glazes"
+		},
+		{
+			"id": 2,
+			"name": "Tumblr",
+			"clay": "B-Mix",
+			"date": {
+				"thrown": "2017-04-06",
+				"bisqued": "2017-04-06",
+				"glazed": ""
+			},
+			"cone": 5,
+			"weight": {
+				"onTheWheel": "300",
+				"beforeBisque": "200",
+				"afterBisque": "150",
+				"afterGlazed": ""
+			},
+			"glazes": "description of the glazes"
+		}
+	]
+}
