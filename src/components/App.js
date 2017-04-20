@@ -1,17 +1,21 @@
 import React from 'react';
 import Header from './Header';
 import ClayItemPreview from './ClayItemPreview';
+import data from '../clay';
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			headerMessage: 'ClayDoc! from App.'
+			headerMessage: 'ClayDoc! from App.',
+			data: []
 		};
 	}
 
 	componentDidMount() {
-		console.log("Inside Component Did Mount");
+		this.setState({
+			data: data.content
+		})
 	}
 
 	componentWillUnmount() {
@@ -22,8 +26,8 @@ class App extends React.Component {
 			<div>
 				<Header message={this.state.headerMessage}/>
 				<div>
-					{this.props.data.map(clayItem =>
-						<ClayItemPreview {...clayItem}></ClayItemPreview>
+					{this.state.data.map(clayItem =>
+						<ClayItemPreview key={clayItem.id} {...clayItem}></ClayItemPreview>
 					)}
 
 				</div>
