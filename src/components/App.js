@@ -1,38 +1,50 @@
 import React from 'react';
 import Header from './Header';
-import ClayItemPreview from './ClayItemPreview';
-import data from '../clay';
+import ItemList from './ItemList';
+import Item from './Item';
+
+const pushState = (object, url) =>
+	window.history.pushState(object, '', url);
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			headerMessage: 'ClayDoc! from App.',
-			data: []
+			items: this.props.initialItems
 		};
 	}
 
 	componentDidMount() {
-		this.setState({
-			data: data.content
-		})
 	}
 
 	componentWillUnmount() {
 		console.log("Inside Component will unmount");
 	}
+
 	render() {
 		return (
 			<div>
 				<Header message={this.state.headerMessage}/>
-				<div>
-					{this.state.data.map(clayItem =>
-						<ClayItemPreview key={clayItem.id} {...clayItem}></ClayItemPreview>
-					)}
-
-				</div>
+				{this.loadCurrentItem()}
 			</div>
 		);
+	}
+
+	/* User defined functions */
+	loadCurrentItem() {
+		if (this.state.currentItemId) {
+			return <Item {...this.state.items[this.state.currentItemId]}/>;
+		} else {
+			return <ItemList onItemClick={this.fetchItem} items={this.state.items}/>;
+		}
+	}
+	fetchItem = (itemId) => {
+		pushState({currentItemId: itemId}, `/items/${itemId}`);
+		this.setState({
+			headerMessage: this.state.items[itemId].name,
+			currentItemId: itemId
+		})
 	}
 };
 

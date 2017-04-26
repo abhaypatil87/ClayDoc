@@ -1,11 +1,27 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-const ClayItemPreview = (clayItem) => (
-	<div className="ClayItemPreview row">
-		<div className="item-name">{clayItem.name}</div>
-		<div>{clayItem.clay}</div>
-		<div>{clayItem.date.thrown}</div>
-	</div>
-);
+class ClayItemPreview extends Component {
+	loadClayItemDetails = () => {
+		this.props.onClick(this.props.id);
+	};
+
+	render() {
+		return (
+			<div className="link ClayItemPreview row" onClick={this.loadClayItemDetails}>
+				<div className="item-name">{this.props.name}</div>
+				<div>{this.props.clay}</div>
+				<div>{this.props.date.thrown}</div>
+			</div>
+		);
+	}
+}
+
+ClayItemPreview.propTypes = {
+	id: React.PropTypes.number,
+	name: React.PropTypes.string,
+	clay: React.PropTypes.string,
+	date: React.PropTypes.object,
+	onClick: React.PropTypes.func
+}
 
 export default ClayItemPreview;

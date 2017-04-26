@@ -4,7 +4,6 @@ import express from 'express';
 import apiRouter from './api';
 import sassMiddleware from 'node-sass-middleware';
 import path from 'path';
-//import fs from 'fs';
 
 const expressServer = express();
 
@@ -14,10 +13,16 @@ expressServer.use(sassMiddleware({
 	debug: true
 }));
 expressServer.set('view engine', 'ejs');
+import serverRender from './serverRender';
 expressServer.get('/', (request, response) => {
-	response.render('index', {
-		content: 'Hellow World...Be Passionate...'
-	});
+	serverRender()
+	.then(({initialMarkup, initialData}) => {
+		response.render('index', {
+			initialMarkup,
+			initialData
+		});
+	})
+	.catch(console.error("Something went wrong. Server.js."));
 });
 
 // expressServer.get('/about', (request, response) => {
@@ -31,7 +36,7 @@ expressServer.use('/api', apiRouter);
 /* This line matches the URL and fetches the same from the public folder */
 expressServer.use(express.static('public'));
 
-expressServer.listen(config.port, () => {
+expressServer.listen(config.port, config.host, () => {
 	console.log("Express Server is listening on " + config.port);
 });
 
